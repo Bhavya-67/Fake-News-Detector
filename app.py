@@ -9,7 +9,6 @@ background-position: center;
 }
 </style>
 """
-
 st.markdown(page_bg, unsafe_allow_html=True)
 
 st.title("📰 Fake News Detector")
@@ -17,4 +16,12 @@ st.title("📰 Fake News Detector")
 news = st.text_area("Enter News Text")
 
 if st.button("Check News"):
-    st.success("Prediction will appear here")
+    if news.strip() == "":
+        st.warning("Please enter some news text")
+    else:
+        fake_keywords = ["rumor", "cure all", "viral post", "internet shutdown"]
+
+        if any(word in news.lower() for word in fake_keywords):
+            st.error("Fake News ❌")
+        else:
+            st.success("Real News ✅")
